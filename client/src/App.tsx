@@ -1,8 +1,9 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { Router } from "./Router";
-import { Toaster } from "./components/ui/toaster.tsx";
+import { Toaster } from "@/components/ui/toaster.tsx";
+import { Router } from "@/Router";
 
+// @tanstack/react-query
 export const queryClient = new QueryClient();
 
 export default function App() {

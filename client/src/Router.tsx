@@ -6,8 +6,8 @@ import ForgetPassword from "./components/auth/forgot-password";
 import PasswordReset from "./components/auth/password-reset";
 import { useSession } from "./store/session.store";
 import AdminLayout from "./components/layout/admin-layout";
-import LandingPage from "./components/app/landing-page";
 import Layout from "./components/layout/layout";
+import Landing from "./pages/landing";
 
 const PrivateRoute = ({ children }: { children: ReactNode }) => {
   const { user } = useSession();
@@ -56,7 +56,7 @@ export const Router = () => {
             <Route index element={<h1>Admin Dashboard</h1>} />
           </Route>
           <Route path="/" element={<Layout />}>
-            <Route index element={<LandingPage />} />
+            <Route index element={<Landing />} />
           </Route>
         </Routes>
       </BrowserRouter>
