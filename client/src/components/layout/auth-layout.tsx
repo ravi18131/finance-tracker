@@ -1,5 +1,4 @@
 import React from "react";
-import { Card } from "../ui/card";
 import { useSession } from "@/store/session.store";
 import { Navigate } from "react-router-dom";
 
@@ -11,33 +10,23 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
   if (user?.id) {
     return <Navigate to="/admin" replace />;
   }
-  const date = new Date();
   return (
-    <div className="font-[sans-serif] bg-[linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('/images/login-bg.jpg')] bg-cover no-repeat bg-center">
-      <div className="min-h-screen flex fle-col items-center justify-center lg:p-6 p-4">
-        <Card className="bg-white rounded-xl px-6 py-8 max-w-md mx-auto w-full">
-          {/* Uncomment to use the logo */}
-          {/* <img
-            src="/images/logo_black.png"
-            alt="logo"
-            className="w-48 mx-auto"
-          /> */}
-          <h1 className="text-2xl text-center font-bold text-primary mt-4">
-            Admin Portal
-          </h1>
-          <div>{children}</div>
-        </Card>
-      </div>
-      <div className="block sm:fixed bottom-3 w-full ">
-        <p className="text-white text-center mt-6">
-          &copy; {date.getFullYear()} AMCE. All rights reserved.
-        </p>
-        <p className="text-white text-center mt-0">
-          Powered by{" "}
-          <a href="#" target="_blank" className="text-primary">
-            <span className="text-white underline">AMCE</span>
-          </a>
-        </p>
+    <div className="flex min-h-svh flex-col items-center justify-center bg-muted p-6 md:p-10">
+      <div className="w-full max-w-sm md:max-w-3xl">
+        <div className="mb-6 flex w-full items-center justify-center">
+          <img
+            src="/images/amce_logo.png"
+            alt="Logo"
+            className="h-20 w-auto md:h-12 lg:h-16"
+          />
+        </div>
+        <div className="flex flex-col gap-6">
+          {children}
+          <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary">
+            By clicking continue, you agree to our{" "}
+            <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+          </div>
+        </div>
       </div>
     </div>
   );

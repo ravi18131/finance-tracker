@@ -9,9 +9,14 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Link, useParams } from "react-router-dom";
+import { Card, CardContent } from "@/components/ui/card";
+import Spinner from "@/components/ui/spinner";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { useState } from "react";
+import { ArrowLeft } from "lucide-react";
 
 const FormSchema = z.object({
   hash: z.string({ required_error: "Hash is required" }),
@@ -23,6 +28,7 @@ const FormSchema = z.object({
 
 export default function PasswordReset() {
   const params = useParams<Record<string, string | undefined>>();
+  const [error_message, set_error_message] = useState("");
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -35,60 +41,71 @@ export default function PasswordReset() {
 
   const onSubmit = (data: z.infer<typeof FormSchema>) => {
     console.log(data);
+    set_error_message("");
   };
 
   return (
-    <>
-      <h3 className="text-md text-center font-medium mt-1 mb-10">
-        Reset your password
-      </h3>
-
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="w-full space-y-1"
-        >
-          <FormField
-            control={form.control}
-            name="new_password"
-            render={({ field }) => (
-              <FormItem className="space-y-2">
-                <FormLabel>New password</FormLabel>
-                <FormControl>
-                  <Input placeholder="new password" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="confirm_password"
-            render={({ field }) => (
-              <FormItem className="space-y-2">
-                <FormLabel>Confirm password</FormLabel>
-                <FormControl>
-                  <Input placeholder="confirm password" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <div className="!mt-6 text-center">
-            <Button type="submit" className="w-full">
-              Reset password
-            </Button>
-          </div>
-        </form>
-      </Form>
-      <div className="text-sm text-center mt-6">
-        <Link
-          to="/auth/login"
-          className="text-primary font-semibold hover:underline"
-        >
-          Back to login
-        </Link>
-      </div>
-    </>
+    <Card className="overflow-hidden max-w-md mx-auto">
+      <CardContent className="p-1">
+        <Form {...form}>
+          <form className="p-6 md:p-8" onSubmit={form.handleSubmit(onSubmit)}>
+            <div className="flex flex-col gap-6">
+              <div className="flex flex-col items-center text-center">
+                <h1 className="text-2xl font-bold">Reset your password</h1>
+                <p className="text-sm text-muted-foreground mt-3">
+                  Enter your new password below to reset your password.
+                </p>
+              </div>
+              {error_message && (
+                <Alert variant="destructive" className="mt-5">
+                  <AlertDescription>
+                    {error_message || "An error occurred"}
+                  </AlertDescription>
+                </Alert>
+              )}
+              <FormField
+                control={form.control}
+                name="new_password"
+                render={({ field }) => (
+                  <FormItem className="space-y-2">
+                    <FormLabel>New password</FormLabel>
+                    <FormControl>
+                      <Input placeholder="new password" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="confirm_password"
+                render={({ field }) => (
+                  <FormItem className="space-y-2">
+                    <FormLabel>Confirm password</FormLabel>
+                    <FormControl>
+                      <Input placeholder="confirm password" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button type="submit" className="w-full">
+                Continue <Spinner isLoading={false} />
+              </Button>
+              <Link
+                to="/auth/login"
+                className="text-primary text-center flex justify-center items-center font-medium hover:underline group"
+              >
+                <ArrowLeft
+                  className="mr-2 transform transition-transform duration-300 group-hover:-translate-x-1"
+                  size={16}
+                />
+                Back to login
+              </Link>
+            </div>
+          </form>
+        </Form>
+      </CardContent>
+    </Card>
   );
 }

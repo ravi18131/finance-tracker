@@ -1,7 +1,7 @@
 import { Github, Code } from "lucide-react";
 import { Link } from "react-router-dom";
 
-export default function Navbar() {
+export default function Header() {
   return (
     <header className="fixed w-full z-50 border-b border-gray-800 bg-gray-950/90 backdrop-blur-sm">
       <nav className="py-2.5">

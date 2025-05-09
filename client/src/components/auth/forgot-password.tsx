@@ -4,14 +4,20 @@ import { z } from "zod";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
+import { Card, CardContent } from "@/components/ui/card";
+import Spinner from "@/components/ui/spinner";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { useState } from "react";
+import { ArrowLeft } from "lucide-react";
 
 const FormSchema = z.object({
   email: z.string({ required_error: "Email is required" }).refine(
@@ -27,50 +33,64 @@ export default function ForgetPassword() {
     resolver: zodResolver(FormSchema),
     defaultValues: {},
   });
-
+  const [error_message, set_error_message] = useState("");
   const onSubmit = (data: z.infer<typeof FormSchema>) => {
     console.log(data);
+    set_error_message("");
   };
 
   return (
-    <>
-      <h3 className="text-md text-center font-medium mt-1 mb-10">
-        Forget your password?
-      </h3>
-
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="w-full space-y-1"
-        >
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem className="space-y-2">
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input placeholder="email@example.com" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <div className="!mt-6 text-center">
-            <Button type="submit" className="w-full">
-              Send password reset link
-            </Button>
-          </div>
-        </form>
-      </Form>
-      <div className="text-sm text-center mt-6">
-        <Link
-          to="/auth/login"
-          className="text-primary font-semibold hover:underline"
-        >
-          Back to login
-        </Link>
-      </div>
-    </>
+    <Card className="overflow-hidden max-w-md mx-auto">
+      <CardContent className="p-1">
+        <Form {...form}>
+          <form className="p-6 md:p-8" onSubmit={form.handleSubmit(onSubmit)}>
+            <div className="flex flex-col gap-6">
+              <div className="flex flex-col items-center text-center">
+                <h1 className="text-2xl font-bold">Forget your password?</h1>
+                <p className="text-sm text-muted-foreground">
+                  Enter your email address to reset your password.
+                </p>
+              </div>
+              {error_message && (
+                <Alert variant="destructive" className="mt-5">
+                  <AlertDescription>
+                    {error_message || "An error occurred"}
+                  </AlertDescription>
+                </Alert>
+              )}
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem className="space-y-2">
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input placeholder="email@example.com" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                    <FormDescription>
+                      We will send you a password reset link to your email.
+                    </FormDescription>
+                  </FormItem>
+                )}
+              />
+              <Button type="submit" className="w-full">
+                Send password reset link <Spinner isLoading={false} />
+              </Button>
+              <Link
+                to="/auth/login"
+                className="text-primary text-center flex justify-center items-center font-medium hover:underline group"
+              >
+                <ArrowLeft
+                  className="mr-2 transform transition-transform duration-300 group-hover:-translate-x-1"
+                  size={16}
+                />
+                Back to login
+              </Link>
+            </div>
+          </form>
+        </Form>
+      </CardContent>
+    </Card>
   );
 }
