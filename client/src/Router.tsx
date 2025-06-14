@@ -10,7 +10,7 @@ import Layout from "./components/layout/layout";
 import Landing from "./pages/landing";
 
 const PrivateRoute = ({ children }: { children: ReactNode }) => {
-  return <>{children}</>;
+  // return <>{children}</>;
   const { user } = useSession();
   if (user?.id) {
     return <>{children}</>;

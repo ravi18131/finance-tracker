@@ -20,12 +20,10 @@ export default function AdminLayout() {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <SidebarInset
-        className={`${currentPath !== "/" ? "bg-white" : "bg-gray-100 "}`}
-      >
-        <nav className="h-12 flex items-center justify-between fixed w-[-webkit-fill-available] bg-primary z-10">
+      <SidebarInset className="bg-gray-100">
+        <nav className="h-12 flex items-center justify-between fixed w-[-webkit-fill-available] border-b bg-white z-10">
           <div className="flex items-center gap-2 px-4">
-            <SidebarTrigger className="-ml-1 text-white" />
+            <SidebarTrigger className="-ml-2" />
           </div>
 
           <NavUser />

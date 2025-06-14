@@ -31,11 +31,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <Sidebar
       collapsible="icon"
       {...props}
-      className="bg-primary bg-center bg-cover"
+      className="bg-black bg-center bg-cover"
     >
       <SidebarHeader>
         {/* <img src="/images/admin-logo.png" className="w-52 mx-auto p-3" /> */}
-        <h1 className="text-2xl text-center font-bold text-primary mt- text-white my-5">
+        <h1 className="text-2xl text-center font-bold text-primary text-white my-5">
           AMCE
         </h1>
       </SidebarHeader>
