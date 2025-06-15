@@ -7,8 +7,8 @@ export default function Header() {
       <nav className="py-2.5">
         <div className="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
           <Link to="/" className="flex items-center">
-            <Code className="h-6 w-6 mr-3 text-primary" />
-            <span className="self-center text-xl font-semibold whitespace-nowrap bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">
+            <Code className="h-6 w-6 mr-3 text-[#1D325C]" />
+            <span className="self-center text-xl font-semibold whitespace-nowrap bg-gradient-to-r from-[#1D325C] to-purple-400 bg-clip-text text-transparent">
               TS React+Node
             </span>
           </Link>
@@ -30,7 +30,7 @@ export default function Header() {
               to="https://github.com/ankitarima/stater-template-nodejs-react"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white bg-primary hover:bg-primary/90 focus:ring-4 focus:ring-primary/30 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 focus:outline-none"
+              className="bg-[#1D325C] hover:bg-[#1D325C]/90 text-white focus:ring-4 focus:ring-primary/30 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 focus:outline-none"
             >
               Download
             </Link>

@@ -1,5 +1,10 @@
-import { Cog, LogOut } from "lucide-react";
-import { Link } from "react-router-dom";
+import {
+  BellIcon,
+  CreditCardIcon,
+  LogOutIcon,
+  UserCircleIcon,
+} from "lucide-react";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -19,20 +24,18 @@ export function NavUser() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <SidebarMenuButton
-          size="default"
-          className="w-auto hover:bg-transparent active:bg-transparent mr-2"
+          size="lg"
+          className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
         >
-          <Avatar className="h-8 w-8 rounded-full">
+          <Avatar className="h-8 w-8 rounded-full grayscale">
             <AvatarImage src={user?.avatar} alt={user?.full_name} />
-            <AvatarFallback className="rounded-full bg-white">
-              <span>{user?.full_name?.charAt(0).toUpperCase() || "U"}</span>
-            </AvatarFallback>
+            <AvatarFallback className="rounded-full">CN</AvatarFallback>
           </Avatar>
-          <div className="grid flex-1 text-left text-sm leading-none text-white">
-            <p className="truncate text-sm font-semibold mb-0">
-              {user?.full_name}
-            </p>
-            <p className="truncate text-xs -mt-1">{user?.email}</p>
+          <div className="grid flex-1 text-left text-sm leading-tight">
+            <span className="truncate font-medium"> {user?.full_name}</span>
+            <span className="truncate text-xs text-muted-foreground">
+              {user?.email}
+            </span>
           </div>
         </SidebarMenuButton>
       </DropdownMenuTrigger>
@@ -46,28 +49,34 @@ export function NavUser() {
           <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
             <Avatar className="h-8 w-8 rounded-full">
               <AvatarImage src={user?.avatar} alt={user?.full_name} />
-              <AvatarFallback className="rounded-full">
-                <span>{user?.full_name?.charAt(0).toUpperCase() || "U"}</span>
-              </AvatarFallback>
+              <AvatarFallback className="rounded-full">CN</AvatarFallback>
             </Avatar>
             <div className="grid flex-1 text-left text-sm leading-tight">
-              <span className="truncate font-semibold">{user?.full_name}</span>
-              <span className="truncate text-xs">{user?.email}</span>
+              <span className="truncate font-medium"> {user?.full_name}</span>
+              <span className="truncate text-xs text-muted-foreground">
+                {user?.email}
+              </span>
             </div>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <Link to="/admin">
-            <DropdownMenuItem>
-              <Cog />
-              Settings
-            </DropdownMenuItem>
-          </Link>
+          <DropdownMenuItem>
+            <UserCircleIcon />
+            Account
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <CreditCardIcon />
+            Billing
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <BellIcon />
+            Notifications
+          </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={logoutUser}>
-          <LogOut />
+          <LogOutIcon />
           Log out
         </DropdownMenuItem>
       </DropdownMenuContent>
