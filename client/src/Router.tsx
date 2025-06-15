@@ -8,6 +8,7 @@ import { useSession } from "./store/session.store";
 import AdminLayout from "./components/layout/admin-layout";
 import Layout from "./components/layout/layout";
 import Landing from "./pages/landing";
+import Dashboard from "./pages/admin/dashboard";
 
 const PrivateRoute = ({ children }: { children: ReactNode }) => {
   // return <>{children}</>;
@@ -54,7 +55,7 @@ export const Router = () => {
               </PrivateRoute>
             }
           >
-            <Route index element={<h1>Admin Dashboard</h1>} />
+            <Route index element={<Dashboard />} />
           </Route>
           <Route path="/" element={<Layout />}>
             <Route index element={<Landing />} />

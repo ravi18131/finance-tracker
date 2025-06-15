@@ -6,8 +6,8 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center gap-2 mb-4 md:mb-0">
-            <Code className="h-6 w-6 text-primary" />
-            <span className="font-bold text-xl bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">
+            <Code className="h-6 w-6 text-[#1D325C]" />
+            <span className="font-bold text-xl bg-gradient-to-r from-[#1D325C] to-purple-400 bg-clip-text text-transparent">
               TS React+Node Starter
             </span>
           </div>

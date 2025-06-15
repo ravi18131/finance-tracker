@@ -15,19 +15,23 @@ export default function LandingPage() {
     <div className="min-h-screen bg-gray-950 text-gray-100">
       <section className="py-20 md:py-48">
         <div className="container mx-auto px-4 text-center">
-          <div className="inline-block rounded-full bg-gray-800/50 px-3 py-1 text-sm font-medium text-primary mb-6">
+          <div className="inline-block rounded-full bg-gray-800/50 px-3 py-1 text-sm font-medium text-[#1D325C] mb-6">
             v1.0.0 Released
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-[#1D325C] to-purple-400 bg-clip-text text-transparent">
             React+Node TypeScript Starter Template
           </h1>
           <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-10">
-            A modern, SEO-friendly, and production-ready template for building
-            React applications with TypeScript
+            A modern, opinionated starter template for building scalable React
+            applications with Node.js backend, TypeScript, and best practices
+            included out of the box.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-20">
             <Link to="#get-started">
-              <Button size="lg" className="w-full sm:w-auto gap-2">
+              <Button
+                size="lg"
+                className="w-full sm:w-auto gap-2 bg-[#1D325C] hover:bg-[#1D325C]/90 text-white"
+              >
                 <Download className="h-5 w-5" />
                 Get Started
               </Button>
@@ -101,7 +105,7 @@ export default function App() {
             {/* Feature 1 */}
             <div className="bg-gray-900/50 p-6 rounded-lg border border-gray-800">
               <div className="bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                <Zap className="h-6 w-6 text-primary" />
+                <Zap className="h-6 w-6 text-[#1D325C]" />
               </div>
               <h3 className="text-xl font-bold mb-2">TypeScript First</h3>
               <p className="text-gray-400">
@@ -113,7 +117,7 @@ export default function App() {
             {/* Feature 2 */}
             <div className="bg-gray-900/50 p-6 rounded-lg border border-gray-800">
               <div className="bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                <Package className="h-6 w-6 text-primary" />
+                <Package className="h-6 w-6 text-[#1D325C]" />
               </div>
               <h3 className="text-xl font-bold mb-2">Modern Stack</h3>
               <p className="text-gray-400">
@@ -125,7 +129,7 @@ export default function App() {
             {/* Feature 3 */}
             <div className="bg-gray-900/50 p-6 rounded-lg border border-gray-800">
               <div className="bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                <Shield className="h-6 w-6 text-primary" />
+                <Shield className="h-6 w-6 text-[#1D325C]" />
               </div>
               <h3 className="text-xl font-bold mb-2">SEO Optimized</h3>
               <p className="text-gray-400">
@@ -137,7 +141,7 @@ export default function App() {
             {/* Feature 4 */}
             <div className="bg-gray-900/50 p-6 rounded-lg border border-gray-800">
               <div className="bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                <Sparkles className="h-6 w-6 text-primary" />
+                <Sparkles className="h-6 w-6 text-[#1D325C]" />
               </div>
               <h3 className="text-xl font-bold mb-2">Dark Mode Ready</h3>
               <p className="text-gray-400">
@@ -149,7 +153,7 @@ export default function App() {
             {/* Feature 5 */}
             <div className="bg-gray-900/50 p-6 rounded-lg border border-gray-800">
               <div className="bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                <Code className="h-6 w-6 text-primary" />
+                <Code className="h-6 w-6 text-[#1D325C]" />
               </div>
               <h3 className="text-xl font-bold mb-2">Best Practices</h3>
               <p className="text-gray-400">
@@ -161,7 +165,7 @@ export default function App() {
             {/* Feature 6 */}
             <div className="bg-gray-900/50 p-6 rounded-lg border border-gray-800">
               <div className="bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                <Github className="h-6 w-6 text-primary" />
+                <Github className="h-6 w-6 text-[#1D325C]" />
               </div>
               <h3 className="text-xl font-bold mb-2">CI/CD Ready</h3>
               <p className="text-gray-400">
@@ -189,7 +193,7 @@ export default function App() {
           <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
             <div>
               <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                <span className="text-primary">01.</span> Productivity Boost
+                <span className="text-[#1D325C]">01.</span> Productivity Boost
               </h3>
               <p className="text-gray-400 mb-4">
                 Skip the tedious setup process and jump straight into building
@@ -205,7 +209,7 @@ export default function App() {
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-2">
                     <div className="mt-1 h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                      <div className="h-2 w-2 rounded-full bg-primary"></div>
+                      <div className="h-2 w-2 rounded-full bg-[#1D325C]"></div>
                     </div>
                     <span className="text-gray-300">{item}</span>
                   </li>
@@ -215,7 +219,7 @@ export default function App() {
 
             <div>
               <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                <span className="text-primary">02.</span> Best Practices
+                <span className="text-[#1D325C]">02.</span> Best Practices
                 Built-in
               </h3>
               <p className="text-gray-400 mb-4">
@@ -232,7 +236,7 @@ export default function App() {
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-2">
                     <div className="mt-1 h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                      <div className="h-2 w-2 rounded-full bg-primary"></div>
+                      <div className="h-2 w-2 rounded-full bg-[#1D325C]"></div>
                     </div>
                     <span className="text-gray-300">{item}</span>
                   </li>
@@ -247,7 +251,7 @@ export default function App() {
       <section id="opensource" className="py-20 md:py-28">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <div className="inline-block rounded-full bg-gray-800/50 px-3 py-1 text-sm font-medium text-primary mb-6">
+            <div className="inline-block rounded-full bg-gray-800/50 px-3 py-1 text-sm font-medium text-[#1D325C] mb-6">
               100% Open Source
             </div>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -261,7 +265,7 @@ export default function App() {
 
           <div className="bg-gray-900/50 border border-gray-800 rounded-lg p-8 max-w-3xl mx-auto">
             <div className="flex items-start gap-6">
-              <Github className="h-12 w-12 text-primary flex-shrink-0" />
+              <Github className="h-12 w-12 text-[#1D325C] flex-shrink-0" />
               <div>
                 <h3 className="text-2xl font-bold mb-2">Community Driven</h3>
                 <p className="text-gray-400 mb-4">
@@ -399,9 +403,8 @@ export default function App() {
               </Link>
               <Link to="#get-started">
                 <Button
-                  variant="outline"
                   size="lg"
-                  className="w-full sm:w-auto gap-2 text-accent-foreground"
+                  className="w-full sm:w-auto gap-2 text-accent-foreground bg-[#1D325C] hover:bg-[#1D325C]/90 text-white "
                 >
                   <Download className="h-5 w-5" />
                   Download Now
