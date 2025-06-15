@@ -10,7 +10,7 @@ interface ApiResponse<T> {
  * Initializing axios instance
  */
 const fetchApi = axios.create({
-  baseURL: "http://localhost:5021/api/v1",
+  baseURL: "http://localhost:5001/api/v1",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",

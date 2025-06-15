@@ -4,20 +4,12 @@ import { persist, createJSONStorage } from "zustand/middleware";
 
 export interface IUser {
   id: string;
-  user_id: string;
+  name: string;
   email: string;
-  phone1?: string;
-  phone2?: string;
-  extension?: string;
-  notes?: string;
+  mobile: string;
+  avatar?: string;
   role: "SUPER_ADMIN" | "ADMIN";
   is_active: boolean;
-  first_name: string;
-  last_name: string;
-  full_name: string;
-  title?: string;
-  avatar?: string;
-  is_elc_user: boolean;
   two_fa_enabled: boolean;
 }
 
