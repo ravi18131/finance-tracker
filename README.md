@@ -1,6 +1,6 @@
-# Starter Template
+# Finance Tracker(FinTrack)
 
-Welcome to the **Starter Template**! This repository provides a full-stack template to quickly set up and build new projects using modern technologies.
+Welcome to the **Finance Tracker(FinTrack)**! This repository provides a full-stack template to quickly set up and build new projects using modern technologies.
 
 ## 🚀 Tech Stack
 
@@ -8,7 +8,6 @@ Welcome to the **Starter Template**! This repository provides a full-stack templ
 - **Backend:** Node.js + Express.js + TypeScript
 - **Database:** Prisma ORM (with a seeder)
 - **Validation:** Zod
-- **File Uploading:** express-upload
 
 ## 📂 Project Structure
 
@@ -33,7 +32,7 @@ starter-template/
 │   │   ├── components/
 │   │   ├── hooks/
 │   │   ├── pages/
-│   │   ├── store/      # Zustand store
+│   │   ├── context/
 │   │   ├── App.tsx
 │   ├── package.json
 │   ├── tsconfig.json
@@ -45,8 +44,8 @@ starter-template/
 ### 1️⃣ Clone the Repository
 
 ```sh
-git clone https://github.com/ankitarima/stater-template-nodejs-react.git
-cd stater-template-nodejs-react
+git clone https://github.com/ravi18131/finance-tracker.git
+cd finance-tracker
 ```
 
 ### 2️⃣ Install Dependencies
@@ -61,7 +60,7 @@ npm install
 #### Backend
 
 ```sh
-cd ../server
+cd server
 npm install
 ```
 
@@ -84,6 +83,11 @@ npm run db:push
 npm run db:seed
 ```
 
+#### Build Redis Docker Server
+```sh
+docker run -d --name redis-stack -p 6379:6379 -p 8001:8001 redis/redis-stack:latest
+```
+
 ### 5️⃣ Run the Project
 
 #### Start Backend
@@ -104,16 +108,18 @@ npm run dev
 
 Once both client and server are running, access the app at:
 
-- Client: `http://localhost:5020`
+- Client: `http://localhost:5000`
 - Server: `http://localhost:5021`
 
 ## 🔥 Features
 
 - Fully typed TypeScript setup
-- Zustand for global state management
+- Context for global state management
 - Prisma ORM with migrations and seeding
 - Express.js API with structured controllers and routes
-- File upload handling with `express-upload`
+- Redis server for cache memory
+- Rate limit middleware with `express-rate-limit`
+- Role based middleware
 - Modern UI with ShadCN & Tailwind CSS
 - Zod validation for safer API inputs
 
