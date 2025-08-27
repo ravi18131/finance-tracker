@@ -1,8 +1,6 @@
 import { ReactNode, Suspense, lazy } from "react";
 import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
 import { useSession } from "./context/session-context";
-import UserTransactionDetails from "./pages/user/transaction-details";
-import Profile from "./pages/user/profile";
 
 // Lazy imports
 const Login = lazy(() => import("./components/auth/login"));
@@ -26,7 +24,8 @@ const AnalyticDetail = lazy(() => import("./pages/admin-readonly/analytics/analy
 //user
 const UserLayout = lazy(() => import("./components/layout/user-layout"));
 const UserDashboard = lazy(() => import("./pages/user/dashboard"));
-
+const UserTransactionDetails = lazy(() => import("./pages/user/transaction-details"));
+const Profile = lazy(() => import("./pages/user/profile"));
 
 const PrivateRoute = ({ children }: { children: ReactNode }) => {
   const { user } = useSession();
