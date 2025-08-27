@@ -19,12 +19,14 @@ import { Link, useParams } from "react-router-dom";
 import { transaction_columns } from "@/components/admin-dashboard/transactions/transaction-table";
 import TransactionForm from "@/components/admin-dashboard/transactions/transaction-form";
 import { ITransaction } from "@/lib/interfaces";
+import { useSession } from "@/store/session.store";
 
 export default function TransactionDetails() {
   const [openDialog, setOpenDialog] = useState(false);
   const { userId } = useParams<{ userId: string }>()
   const [editingTransaction, setEditingTransaction] = useState<ITransaction | null>(null);
 
+  const { user } = useSession();
   const query = useQuery({
     queryKey: [`transactions-${userId}`],
     queryFn: () => fetchApi.get(`/admin/transactions/user/${userId}`),
@@ -57,15 +59,13 @@ export default function TransactionDetails() {
 
   const transactions = query.data?.data.data.transactions || [];
 
-  console.log("transactions: ", transactions);
-
   return (
     <section>
       <div className="flex items-center justify-between mb-5">
         {/* Left side: back button + title */}
         <div className="flex items-center gap-3">
           <Link
-            to="/admin/transactions"
+            to="/dashboard/transactions"
             className="rounded-full border border-black flex items-center justify-center w-8 h-8"
           >
             <MoveLeft className="w-4 h-4" />
@@ -78,13 +78,17 @@ export default function TransactionDetails() {
 
 
         {/* Right side: Add User Button */}
-        <div className="flex justify-center items-center">
-          <Button onClick={handleAdd} className="rounded-sm flex items-center justify-center">
-            <Plus className="w-5 h-5 mr-2" />
-            Add New Transaction
-            <Spinner loading={false} />
-          </Button>
-        </div>
+        {
+          user?.role === "ADMIN" && (
+            <div className="flex justify-center items-center">
+              <Button onClick={handleAdd} className="rounded-sm flex items-center justify-center">
+                <Plus className="w-5 h-5 mr-2" />
+                Add New Transaction
+                <Spinner loading={false} />
+              </Button>
+            </div>
+          )
+        }
       </div>
 
 

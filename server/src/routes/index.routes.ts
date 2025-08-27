@@ -3,6 +3,7 @@ import authRouter from "@routes/auth/index.routes";
 import { protect, authorize } from "@middlewares/auth.middleware";
 import usersRouter from "./admin/user.routes";
 import transactionRouter from "./admin/transaction.routes";
+import analyticsRouter from "./admin/analytics.routes";
 
 const router = express.Router();
 
@@ -16,23 +17,9 @@ router.use("/auth", authRouter);
 // Protected routes (all logged-in users)
 router.use(protect);
 
-// Admin-only routes
-router.use("/admin/users", authorize("ADMIN"), usersRouter);
-router.use("/admin/transactions", authorize("ADMIN"), transactionRouter);
-
-// Example: User-only routes
-router.get("/profile", authorize("USER"), (req, res) => {
-  res.json({ message: `Welcome USER ${req.session?.name}` });
-});
-
-// Example: Read-only user routes
-router.get("/reports", authorize("READ_ONLY"), (req, res) => {
-  res.json({ message: `Welcome READ_ONLY ${req.session?.name}` });
-});
-
-// Example: Allow both USER and READ_ONLY
-router.get("/shared", authorize("USER", "READ_ONLY"), (req, res) => {
-  res.json({ message: `Shared route for USER and READ_ONLY` });
-});
+// Admin & Read Only User routes
+router.use("/admin/users", usersRouter);
+router.use("/admin/transactions", transactionRouter);
+router.use("/admin/analytics", analyticsRouter);
 
 export default router;

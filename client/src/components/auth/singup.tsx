@@ -59,7 +59,7 @@ export default function SingUp() {
                     toast.success(data.message || "Sign Up successful!!");
                     setUser(data.data.user);
                     localStorage.setItem("access_token", data.data.access_token);
-                    navigate("/admin");
+                    navigate("/dashboard");
                 } else {
                     toast.error(data.message || "Something went wrong!!");
                 }

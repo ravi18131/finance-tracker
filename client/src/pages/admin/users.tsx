@@ -18,9 +18,12 @@ import {
 import ReadOnlyUserForm from "../../components/admin-dashboard/users/read-only-user-form";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSession } from "@/store/session.store";
 
 export default function Users() {
     const [openDialog, setOpenDialog] = useState(false);
+
+    const { user } = useSession();
 
     const query = useQuery({
         queryKey: ["users"],
@@ -58,13 +61,15 @@ export default function Users() {
         );
     };
 
+    const users = query.data?.data.data.users || [];
+
     return (
         <section>
             <div className="flex items-center justify-between mb-5">
                 {/* Left side: back button + title */}
                 <div className="flex items-center gap-3">
                     <Link
-                        to="/admin"
+                        to="/dashboard"
                         className="rounded-full border border-black flex items-center justify-center w-8 h-8"
                     >
                         <MoveLeft className="w-4 h-4" />
@@ -77,40 +82,42 @@ export default function Users() {
 
 
                 {/* Right side: Add User Button */}
-                <div className="flex justify-center items-center">
-                    <Dialog open={openDialog} onOpenChange={setOpenDialog} >
-                        <DialogTrigger asChild>
-                            <Button className="rounded-sm flex items-center justify-center">
-                                <Plus className="w-5 h-5 mr-2" />
-                                Add Read Only User
-                                <Spinner loading={false} />
-                            </Button>
-                        </DialogTrigger>
-                        <DialogContent>
-                            <DialogHeader>
-                                <DialogTitle>Add Read Only User</DialogTitle>
-                                <DialogDescription>
-                                    Fill in the details below to create a read-only user.
-                                </DialogDescription>
-                            </DialogHeader>
+                {user?.role === "ADMIN" && (
+                    <div className="flex justify-center items-center">
+                        <Dialog open={openDialog} onOpenChange={setOpenDialog} >
+                            <DialogTrigger asChild>
+                                <Button className="rounded-sm flex items-center justify-center">
+                                    <Plus className="w-5 h-5 mr-2" />
+                                    Add Read Only User
+                                    <Spinner loading={false} />
+                                </Button>
+                            </DialogTrigger>
+                            <DialogContent>
+                                <DialogHeader>
+                                    <DialogTitle>Add Read Only User</DialogTitle>
+                                    <DialogDescription>
+                                        Fill in the details below to create a read-only user.
+                                    </DialogDescription>
+                                </DialogHeader>
 
-                            <ReadOnlyUserForm
-                                onSuccess={() => {
-                                    query.refetch();
-                                    setOpenDialog(false);
-                                }}
-                                setOpenDialog={setOpenDialog}
-                            />
-                        </DialogContent>
-                    </Dialog>
-                </div>
+                                <ReadOnlyUserForm
+                                    onSuccess={() => {
+                                        query.refetch();
+                                        setOpenDialog(false);
+                                    }}
+                                    setOpenDialog={setOpenDialog}
+                                />
+                            </DialogContent>
+                        </Dialog>
+                    </div>
+                )}
             </div>
 
 
             {!query.isPending ? (
                 <DataTable
                     columns={user_columns(updateUserStatus)}
-                    data={query.data?.data.data.users || []}
+                    data={users}
                     search_label="Name"
                     search_key="name"
                     export_btn={true}

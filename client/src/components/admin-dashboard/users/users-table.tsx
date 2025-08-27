@@ -5,6 +5,7 @@ import { IUser } from "@/lib/interfaces";
 import { Switch } from "@/components/ui/switch";
 import { format } from "date-fns";
 import { Badge } from "@/components/ui/badge";
+import { useSession } from "@/store/session.store";
 
 export const user_columns = (updateUserStatus: (id: string, data: { is_blocked: boolean; }) => void): ColumnDef<IUser>[] => {
     return [
@@ -44,13 +45,19 @@ export const user_columns = (updateUserStatus: (id: string, data: { is_blocked: 
             accessorKey: "isBlocked",
             header: "Blocked",
             cell: ({ row }) => {
-                return (
+                const { user } = useSession();
+
+                return user?.role === "ADMIN" ? (
                     <Switch
-                        checked={row?.original?.isBlocked}
+                        checked={row.original.isBlocked}
                         onCheckedChange={async (value) => {
                             await updateUserStatus(row.original.id, { is_blocked: value });
                         }}
                     />
+                ) : (
+                    <Badge variant={row.original.isBlocked ? "destructive" : "outline"}>
+                        {row.original.isBlocked ? "Blocked" : "Active"}
+                    </Badge>
                 );
             },
         },

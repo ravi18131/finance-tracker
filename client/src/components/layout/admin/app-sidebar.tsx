@@ -35,23 +35,23 @@ const data = {
       items: [
         {
           title: "Dashboard",
-          url: "/admin",
+          url: "/dashboard",
           icon: LayoutDashboardIcon,
         },
         {
           title: "Users",
           icon: UsersIcon,
-          url: "/admin/users",
+          url: "/dashboard/users",
         },
         {
           title: "Analytics",
-          url: "/admin/analytics",
+          url: "/dashboard/analytics",
           icon: BarChartIcon,
         },
         {
           title: "Transactions",
           icon: BookOpen,
-          url: "/admin/transactions",
+          url: "/dashboard/transactions",
         },
       ],
     },

@@ -1,16 +1,7 @@
+import { IUser } from "@/lib/interfaces";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import { persist, createJSONStorage } from "zustand/middleware";
-
-export interface IUser {
-  id: string;
-  name: string;
-  email: string;
-  mobile: string;
-  avatar?: string;
-  role: "READ_ONLY" | "USER" | "ADMIN";
-  is_blocked: boolean;
-}
 
 interface SessionState {
   user?: IUser;

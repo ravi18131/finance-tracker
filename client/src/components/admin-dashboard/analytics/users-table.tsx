@@ -66,9 +66,9 @@ export const user_columns = (updateUserStatus: (id: string, data: { is_blocked: 
             cell({ row }) {
                 return (
                     <>
-                        <Link to={`/dashboard/transactions/${row.original.id}`}>
+                        <Link to={`/dashboard/analytics/${row.original.id}`}>
                             <Button variant="outline" size="sm">
-                                <Eye /> Transaction
+                                <Eye /> Analytics
                             </Button>
                         </Link>
                     </>

@@ -1,5 +1,4 @@
 import { z } from "zod";
-import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -60,7 +59,7 @@ export default function Login() {
           toast.success(data.message || "Sign Up successful!!");
           setUser(data.data.user);
           localStorage.setItem("access_token", data.data.access_token);
-          navigate("/admin");
+          navigate("/dashboard");
         } else {
           toast.error(data.message || "Something went wrong!!");
         }

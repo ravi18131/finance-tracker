@@ -1,7 +1,6 @@
 import { ReactNode, Suspense, lazy } from "react";
 import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
 import { useSession } from "./store/session.store";
-import TransactionDetails from "./pages/admin/transactions/transaction-details";
 
 // Lazy imports
 const Login = lazy(() => import("./components/auth/login"));
@@ -18,10 +17,14 @@ const AdminLayout = lazy(() => import("./components/layout/admin-layout"));
 const Dashboard = lazy(() => import("./pages/admin/dashboard"));
 const Users = lazy(() => import("./pages/admin/users"));
 const Transactions = lazy(() => import("./pages/admin/transactions/transactions"));
+const TransactionDetails = lazy(() => import("./pages/admin/transactions/transaction-details"))
+const Analytics = lazy(() => import("./pages/admin/analytics/analytics"))
+const AnalyticDetail = lazy(() => import("./pages/admin/analytics/analytic-detail"))
 
-const AdminPrivateRoute = ({ children }: { children: ReactNode }) => {
+
+const PrivateRoute = ({ children }: { children: ReactNode }) => {
   const { user } = useSession();
-  if (user?.id && user.role === "ADMIN") {
+  if (user?.id && (user.role === "ADMIN" || user.role === "READ_ONLY")) {
     return <>{children}</>;
   }
   return <Navigate to={"/auth/login"} />;
@@ -68,17 +71,19 @@ export const Router = () => {
 
           {/* Default admin-facing layout */}
           <Route
-            path="/admin"
+            path="/dashboard"
             element={
-              <AdminPrivateRoute>
+              <PrivateRoute>
                 <AdminLayout />
-              </AdminPrivateRoute>
+              </PrivateRoute>
             }
           >
             <Route index element={<Dashboard />} />
             <Route path="users" element={<Users />} />
             <Route path="transactions" element={<Transactions />} />
             <Route path="transactions/:userId" element={<TransactionDetails />} />
+            <Route path="analytics" element={<Analytics />} />
+            <Route path="analytics/:userId" element={<AnalyticDetail />} />
           </Route>
 
           {/* Default public-facing layout */}
