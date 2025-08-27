@@ -1,24 +1,33 @@
 import React from "react";
 import { useSession } from "@/store/session.store";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 interface AuthLayoutProps {
   children: React.ReactNode;
 }
 export default function AuthLayout({ children }: AuthLayoutProps) {
-  const { user } = useSession();
+  const { user, logoutUser } = useSession();
+
   if (user?.id) {
-    return <Navigate to="/admin" replace />;
+    if (user.role === "ADMIN")
+      return <Navigate to="/admin" replace />;
+    else {
+      logoutUser();
+      return <Navigate to="/auth/login" replace />;
+    }
   }
+  
   return (
     <div className="flex min-h-svh flex-col items-center justify-center bg-muted p-6 md:p-10">
       <div className="w-full max-w-sm md:max-w-3xl">
         <div className="mb-6 flex w-full items-center justify-center">
-          <img
-            src="/images/amce_logo.png"
-            alt="Logo"
-            className="h-20 w-auto md:h-12 lg:h-16"
-          />
+          <Link to="/">
+            <img
+              src="/images/fintrack_logo.png"
+              alt="Logo"
+              className="h-20 w-auto md:h-10 lg:h-10"
+            />
+          </Link>
         </div>
         <div className="flex flex-col gap-6">
           {children}

@@ -8,9 +8,8 @@ export interface IUser {
   email: string;
   mobile: string;
   avatar?: string;
-  role: "SUPER_ADMIN" | "ADMIN";
-  is_active: boolean;
-  two_fa_enabled: boolean;
+  role: "READ_ONLY" | "USER" | "ADMIN";
+  is_blocked: boolean;
 }
 
 interface SessionState {

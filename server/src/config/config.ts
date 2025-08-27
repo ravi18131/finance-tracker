@@ -41,21 +41,7 @@ const config = {
   ACCESS_TOKEN_PRIVATE_KEY: validateEnv("ACCESS_TOKEN_PRIVATE_KEY"),
   REFRESH_PUBLIC_KEY: validateEnv("REFRESH_PUBLIC_KEY"),
   REFRESH_PRIVATE_KEY: validateEnv("REFRESH_PRIVATE_KEY"),
-  AWS_ACCESS_KEY_ID: validateEnv("AWS_ACCESS_KEY_ID", "test", false),
-  AWS_SECRET_ACCESS_KEY: validateEnv("AWS_SECRET_ACCESS_KEY", "test", false),
-  AWS_BUCKET_NAME: validateEnv("AWS_BUCKET_NAME", "test", false),
-  AWS_REGION: validateEnv("AWS_REGION", "test", false),
-  SMTP_HOST: validateEnv("SMTP_HOST", "test", false),
-  SMTP_PORT: validateEnv("SMTP_PORT", "test", false),
-  SMTP_USER: validateEnv("SMTP_USER", "test", false),
-  SMTP_PASSWORD: validateEnv("SMTP_PASSWORD", "test", false),
-  SMTP_FROM_EMAIL: validateEnv("SMTP_FROM_EMAIL", "test", false),
-  COUNTRY_STATE_CITY_API: validateEnv("COUNTRY_STATE_CITY_API", "test", false),
-  COUNTRY_STATE_CITY_API_KEY: validateEnv(
-    "COUNTRY_STATE_CITY_API_KEY",
-    "test",
-    true
-  ),
+  REDIS_URL: validateEnv("REDIS_URL"),
 };
 
 export default config;

@@ -15,7 +15,7 @@ export const login = asyncHandler(async (req: Request, res: Response) => {
     return _response(res, 200, false, {}, "Email and password are required");
   }
 
-  const user = await db.adminUser.findFirst({
+  const user = await db.user.findFirst({
     where: { email },
   });
 
@@ -33,7 +33,11 @@ export const login = asyncHandler(async (req: Request, res: Response) => {
     return _response(res, 200, false, {}, "Invalid credentials");
   }
 
-  const user_data = await db.adminUser.findFirst({
+  if (user.isBlocked) {
+    return _response(res, 401, false, {}, "User blocked, Contact to admin");
+  }
+
+  const user_data = await db.user.findFirst({
     omit: {
       password: true,
     },

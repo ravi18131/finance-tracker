@@ -1,45 +1,45 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-model AdminUser {
-  id         Int       @id @default(autoincrement()) // Add a primary key
-  name       String
-  email      String    @unique
-  password   String
-  role       String    @default("ADMIN")
-  update_at  DateTime?
-  created_at DateTime  @default(now())
-
-  @@map("admin_user")
+enum Role {
+  ADMIN
+  USER
+  READ_ONLY
 }
 
 model User {
-  id           Int       @id @default(autoincrement()) // Add a primary key
+  id           Int           @id @default(autoincrement())
   name         String
-  first_name   String
-  last_name    String
-  email        String    @unique
-  mobile       String
-  designation  String?
-  organization String?
-  address      String?
-  city         String?
-  state        String?
-  pincode      String
-  update_at    DateTime?
-  created_at   DateTime  @default(now())
+  email        String        @unique
+  password     String
+  role         Role          @default(USER)
+  isBlocked    Boolean       @default(false)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  transactions Transaction[]
 
   @@map("user")
+}
+
+model Transaction {
+  id          Int      @id @default(autoincrement())
+  type        String // 'income' | 'expense'
+  amount      Float
+  category    String
+  description String?
+  date        DateTime @default(now())
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+
+  @@map("transaction")
 }

@@ -2,6 +2,7 @@ import * as React from "react";
 import {
   ArrowUpCircleIcon,
   BarChartIcon,
+  BookOpen,
   CameraIcon,
   ClipboardListIcon,
   DatabaseIcon,
@@ -10,10 +11,12 @@ import {
   FileTextIcon,
   FolderIcon,
   HelpCircleIcon,
+  Home,
   LayoutDashboardIcon,
   ListIcon,
   SearchIcon,
   SettingsIcon,
+  User,
   UsersIcon,
 } from "lucide-react";
 
@@ -23,11 +26,15 @@ import { NavSecondary } from "@/components/layout/admin/nav-secondary";
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { Link } from "react-router-dom";
+import { NavUser } from "./nav-user";
+import NavMenu from "./nav-menu";
 
 const data = {
   user: {
@@ -35,77 +42,30 @@ const data = {
     email: "m@example.com",
     avatar: "/avatars/shadcn.jpg",
   },
-  navMain: [
+  navMenu: [
     {
-      title: "Dashboard",
-      url: "#",
-      icon: LayoutDashboardIcon,
-    },
-    {
-      title: "Lifecycle",
-      url: "#",
-      icon: ListIcon,
-    },
-    {
-      title: "Analytics",
-      url: "#",
-      icon: BarChartIcon,
-    },
-    {
-      title: "Projects",
-      url: "#",
-      icon: FolderIcon,
-    },
-    {
-      title: "Team",
-      url: "#",
-      icon: UsersIcon,
-    },
-  ],
-  navClouds: [
-    {
-      title: "Capture",
-      icon: CameraIcon,
-      isActive: true,
+      title: "Getting Started",
       url: "#",
       items: [
         {
-          title: "Active Proposals",
-          url: "#",
+          title: "Dashboard",
+          url: "/admin",
+          icon: LayoutDashboardIcon,
         },
         {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Proposal",
-      icon: FileTextIcon,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
+          title: "Users",
+          icon: UsersIcon,
+          url: "/admin/users",
         },
         {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Prompts",
-      icon: FileCodeIcon,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
+          title: "Analytics",
+          url: "/dashboard/analytics",
+          icon: BarChartIcon,
         },
         {
-          title: "Archived",
-          url: "#",
+          title: "Documents",
+          icon: BookOpen,
+          url: "/dashboard/documents",
         },
       ],
     },
@@ -127,23 +87,6 @@ const data = {
       icon: SearchIcon,
     },
   ],
-  documents: [
-    {
-      name: "Data Library",
-      url: "#",
-      icon: DatabaseIcon,
-    },
-    {
-      name: "Reports",
-      url: "#",
-      icon: ClipboardListIcon,
-    },
-    {
-      name: "Word Assistant",
-      url: "#",
-      icon: FileIcon,
-    },
-  ],
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -156,19 +99,20 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               asChild
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
-              <a href="#">
-                <ArrowUpCircleIcon className="h-5 w-5" />
-                <span className="text-base font-semibold">Acme Inc.</span>
-              </a>
+              <Link to="/" className="p-4 pl-0">
+                <img src="/images/fintrack_logo.png" alt=" FinTrack" className="w-48 h-auto" />
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavDocuments items={data.documents} />
+        <NavMenu items={data.navMenu} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
+      <SidebarFooter>
+        <NavUser />
+      </SidebarFooter>
     </Sidebar>
   );
 }

@@ -1,21 +1,26 @@
-import { ReactNode, Suspense } from "react";
+import { ReactNode, Suspense, lazy } from "react";
 import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
-import Login from "./components/auth/login";
-import AuthLayout from "./components/layout/auth-layout";
-import ForgetPassword from "./components/auth/forgot-password";
-import PasswordReset from "./components/auth/password-reset";
 import { useSession } from "./store/session.store";
-import AdminLayout from "./components/layout/admin-layout";
-import Layout from "./components/layout/layout";
-import Landing from "./pages/landing";
-import Dashboard from "./pages/admin/dashboard";
+import SingUp from "./components/auth/singup";
+import Users from "./pages/admin/users/users";
+import PageNotFound from "./components/shared/404";
 
-const PrivateRoute = ({ children }: { children: ReactNode }) => {
-  // return <>{children}</>;
+// Lazy imports
+const Login = lazy(() => import("./components/auth/login"));
+const AuthLayout = lazy(() => import("./components/layout/auth-layout"));
+const ForgetPassword = lazy(() => import("./components/auth/forgot-password"));
+const PasswordReset = lazy(() => import("./components/auth/password-reset"));
+const AdminLayout = lazy(() => import("./components/layout/admin-layout"));
+const Layout = lazy(() => import("./components/layout/home-layout"));
+const HomePage = lazy(() => import("./pages/home"));
+const Dashboard = lazy(() => import("./pages/admin/dashboard"));
+
+const AdminPrivateRoute = ({ children }: { children: ReactNode }) => {
   const { user } = useSession();
-  if (user?.id) {
+  if (user?.id && user.role === "ADMIN") {
     return <>{children}</>;
-  } else return <Navigate to={"/auth/login"} />;
+  }
+  return <Navigate to={"/auth/login"} />;
 };
 
 export const Router = () => {
@@ -23,11 +28,20 @@ export const Router = () => {
     <Suspense fallback={<div>Loading...</div>}>
       <BrowserRouter>
         <Routes>
+           {/* Default auth-facing layout */}
           <Route
             path="/auth/login"
             element={
               <AuthLayout>
                 <Login />
+              </AuthLayout>
+            }
+          />
+          <Route
+            path="/auth/sign-up"
+            element={
+              <AuthLayout>
+                <SingUp />
               </AuthLayout>
             }
           />
@@ -47,19 +61,25 @@ export const Router = () => {
               </AuthLayout>
             }
           />
+
+          {/* Default admin-facing layout */}
           <Route
             path="/admin"
             element={
-              <PrivateRoute>
+              <AdminPrivateRoute>
                 <AdminLayout />
-              </PrivateRoute>
+              </AdminPrivateRoute>
             }
           >
             <Route index element={<Dashboard />} />
+            <Route path="users" element={<Users />} />
           </Route>
+
+          {/* Default public-facing layout */}
           <Route path="/" element={<Layout />}>
-            <Route index element={<Landing />} />
+            <Route index element={<HomePage />} />
           </Route>
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
     </Suspense>

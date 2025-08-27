@@ -6,7 +6,7 @@ import { verifyJwt } from "@services/jwt.service";
 import { db } from "@config/db";
 
 /**
- * protect middleware to a authenticate user
+ * protect middleware to authenticate user
  */
 export const protect = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -20,22 +20,28 @@ export const protect = asyncHandler(
     }
 
     if (!token) {
-      return next(new ErrorResponse("Not authorized", 401));
+      return next(new ErrorResponse("Not authorized, no token", 401));
     }
 
     try {
-      //verify token
+      // verify token
       const decoded = <JwtPayload>verifyJwt(token, "accessTokenPublicKey");
 
       if (!decoded) {
-        return next(new ErrorResponse("Not authorized", 401));
+        return next(new ErrorResponse("Not authorized, invalid token", 401));
       }
 
-      const user = await db.adminUser.findFirst({
-        where: {
-          id: decoded["id"],
-        },
+      const user = await db.user.findUnique({
+        where: { id: decoded["id"] },
       });
+
+      if (!user) {
+        return next(new ErrorResponse("User not found", 404));
+      }
+
+      if (user.isBlocked) {
+        return next(new ErrorResponse("User account is blocked", 403));
+      }
 
       /**
        * !important
@@ -45,25 +51,26 @@ export const protect = asyncHandler(
 
       next();
     } catch (err) {
-      console.log("error", err);
-
+      console.error("Auth error", err);
       return next(new ErrorResponse("Not authorized", 401));
     }
   }
 );
 
 /**
- * RBAC authorize middleware
- * @param roles
- * @returns
+ * Role-based Access Control (RBAC) middleware
+ * @param roles allowed roles
  */
-export const authorize = (...roles: string[]) => {
-  //TODO: make it work with multiple roles
+export const authorize = (...roles: ("ADMIN" | "USER" | "READ_ONLY")[]) => {
   return (req: Request, res: Response, next: NextFunction) => {
-    if (!roles.includes(req.session.roles) && req.session.roles != "admin") {
-      return next(
-        new ErrorResponse(`${req.session.roles} is not authorized`, 401)
-      );
+    if (!req.session) {
+      return next(new ErrorResponse("Not authorized", 401));
+    }
+
+    const userRole = req.session.role;
+
+    if (!roles.includes(userRole)) {
+      return next(new ErrorResponse(`${userRole} is not authorized`, 403));
     }
 
     next();

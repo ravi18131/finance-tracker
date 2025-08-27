@@ -5,15 +5,15 @@ const prisma = new PrismaClient();
 
 async function seed() {
   try {
-    const email = "admin@local.dev";
-    const existingUser = await prisma.adminUser.findUnique({
+    const email = "admin@finance.com";
+    const existingUser = await prisma.user.findUnique({
       where: { email },
     });
 
     if (!existingUser) {
-      const hashedPassword = await bcrypt.hash("Asd123!@#", 10);
+      const hashedPassword = await bcrypt.hash("Admin@123", 10);
 
-      await prisma.adminUser.create({
+      await prisma.user.create({
         data: {
           name: "Admin User",
           email,
