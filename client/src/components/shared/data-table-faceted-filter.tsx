@@ -23,11 +23,11 @@ import { CheckIcon } from "lucide-react";
 interface DataTableFacetedFilterProps<TData, TValue> {
     column?: Column<TData, TValue>;
     title?: string;
-    selected_value: string;
-    set_selected_value: (value: string) => void;
+    selected_value: string | number | boolean;
+    set_selected_value: (value: string | number | boolean) => void;
     options: {
         label: string;
-        value: string;
+        value: string | number | boolean;
         icon?: React.ComponentType<{ className?: string }>;
     }[];
 }
@@ -40,20 +40,21 @@ export function DataTableFacetedFilter<TData, TValue>({
     set_selected_value,
 }: DataTableFacetedFilterProps<TData, TValue>) {
     const facets = column?.getFacetedUniqueValues();
+
     return (
         <Popover>
             <PopoverTrigger asChild>
                 <Button variant="outline" size="sm" className="h-8 border-dashed">
                     <PlusCircledIcon className="mr-2 h-4 w-4" />
                     {title}
-                    {selected_value && (
+                    {selected_value !== "" && selected_value !== undefined && (
                         <>
                             <Separator orientation="vertical" className="mx-2 h-4" />
                             <Badge
                                 variant="secondary"
                                 className="rounded-sm px-1 font-normal"
                             >
-                                {selected_value}
+                                {String(selected_value)} {/* safe display */}
                             </Badge>
                         </>
                     )}
@@ -68,7 +69,7 @@ export function DataTableFacetedFilter<TData, TValue>({
                             {options.map((option) => {
                                 return (
                                     <CommandItem
-                                        key={option.value}
+                                        key={String(option.value)} // FIX for boolean keys
                                         onSelect={() => {
                                             set_selected_value(option.value);
                                             column?.setFilterValue(option.value);
@@ -97,7 +98,7 @@ export function DataTableFacetedFilter<TData, TValue>({
                                 );
                             })}
                         </CommandGroup>
-                        {selected_value && (
+                        {selected_value !== "" && selected_value !== undefined && selected_value !== null && (
                             <>
                                 <CommandSeparator />
                                 <CommandGroup>

@@ -59,13 +59,13 @@ const data = {
         },
         {
           title: "Analytics",
-          url: "/dashboard/analytics",
+          url: "/admin/analytics",
           icon: BarChartIcon,
         },
         {
-          title: "Documents",
+          title: "Transactions",
           icon: BookOpen,
-          url: "/dashboard/documents",
+          url: "/admin/transactions",
         },
       ],
     },

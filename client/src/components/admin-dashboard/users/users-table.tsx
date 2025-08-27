@@ -4,8 +4,9 @@ import { Button } from "@/components/ui/button";
 import { IUser } from "@/lib/interfaces";
 import { Switch } from "@/components/ui/switch";
 import { format } from "date-fns";
+import { Badge } from "@/components/ui/badge";
 
-export const user_columns = (updateUserStatus: (id: string, data: { is_blocked: boolean;}) => void): ColumnDef<IUser>[] => {
+export const user_columns = (updateUserStatus: (id: string, data: { is_blocked: boolean; }) => void): ColumnDef<IUser>[] => {
     return [
         {
             accessorKey: "name",
@@ -29,6 +30,15 @@ export const user_columns = (updateUserStatus: (id: string, data: { is_blocked: 
         {
             accessorKey: "email",
             header: "Email",
+        },
+        {
+            accessorKey: "role",
+            header: "Role",
+            cell: ({ row }) => {
+                return (
+                    <Badge variant={row.original.role == "ADMIN" ? "destructive" : row.original.role == "USER" ? "outline" : "default"}>{row.original.role}</Badge>
+                );
+            },
         },
         {
             accessorKey: "isBlocked",

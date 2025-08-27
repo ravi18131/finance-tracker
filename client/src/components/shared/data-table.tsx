@@ -39,7 +39,7 @@ interface DataTableProps<TData, TValue> {
     title: string;
     options: {
       label: string;
-      value: string;
+      value: string | number | boolean;
       icon?: React.ComponentType<{ className?: string }>;
     }[];
   }[];
@@ -63,7 +63,11 @@ export function DataTable<TData, TValue>({
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
-  const [selectedFacets, setSelectedFacets] = React.useState<Record<string, string>>({});
+
+  // FIX: support string | number | boolean
+  const [selectedFacets, setSelectedFacets] = React.useState<
+    Record<string, string | number | boolean>
+  >({});
 
   const table = useReactTable({
     data,
@@ -79,8 +83,6 @@ export function DataTable<TData, TValue>({
       columnFilters,
     },
   });
-
-  console.log("data: ", data);
 
   React.useEffect(() => {
     table.setPageSize(Number(20));
@@ -142,7 +144,7 @@ export function DataTable<TData, TValue>({
             title={filter.title}
             options={filter.options}
             selected_value={selectedFacets[filter.key] ?? ""}
-            set_selected_value={(val: string) =>
+            set_selected_value={(val) =>
               setSelectedFacets((prev) => ({
                 ...prev,
                 [filter.key]: val,
@@ -154,7 +156,7 @@ export function DataTable<TData, TValue>({
         {export_btn && (
           <Button
             variant="outline"
-            className="h-8 px-2 lg:px-3 w-32"
+            className="h-8 px-2 lg:px-3 w-28"
             onClick={export_data}
           >
             <File className="mr-3 h-5 w-5" />
@@ -171,15 +173,16 @@ export function DataTable<TData, TValue>({
                   return (
                     <TableHead
                       key={header.id}
-                      className={`${index === 0 ? "text-nowrap" : "text-nowrap text-center"
-                        } `}
+                      className={`${
+                        index === 0 ? "text-nowrap" : "text-nowrap text-center"
+                      } `}
                     >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                     </TableHead>
                   );
                 })}
@@ -196,8 +199,9 @@ export function DataTable<TData, TValue>({
                   {row.getVisibleCells().map((cell, index) => (
                     <TableCell
                       key={cell.id}
-                      className={`${index === 0 ? "pl-5" : "text-center"
-                        } text-nowrap`}
+                      className={`${
+                        index === 0 ? "pl-5" : "text-center"
+                      } text-nowrap`}
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
