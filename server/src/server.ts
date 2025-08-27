@@ -18,6 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors(corsOpts));
 app.use(express.json());
 app.use(fileUpload());
+app.set('trust proxy', 1);
 
 // Static Path [serving build application inside the backend]
 app.use(express.static(path.join(__dirname, "../public")));
