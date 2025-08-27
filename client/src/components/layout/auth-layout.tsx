@@ -11,8 +11,9 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
   if (user?.id) {
     if (user.role === "ADMIN" || user.role === "READ_ONLY") {
       return <Navigate to="/dashboard" replace />;
-    }
-    else {
+    } else if (user.role === "USER") {
+      return <Navigate to="/user" replace />;
+    } else {
       logoutUser();
       return <Navigate to="/auth/login" replace />;
     }

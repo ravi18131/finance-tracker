@@ -1,16 +1,14 @@
-import { SectionCards } from "@/components/dashboard/admin-readonly/analytics/section-cards";
-import Users from "./users";
-import AllUsersAnalytics from "@/components/dashboard/admin-readonly/analytics/dashboard-carts";
 import HeroSection from "@/components/dashboard/admin-readonly/analytics/herosection";
+import AllUsersAnalytics from "@/components/dashboard/user/dashboard/dashboard-charts";
+import { SectionCards } from "@/components/dashboard/user/dashboard/section-cards";
 
-export default function Dashboard() {
+export default function UserDashboard() {
   return (
     <>
       <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
         <HeroSection />
         <SectionCards />
         <AllUsersAnalytics />
-        <Users />
       </div>
     </>
   );

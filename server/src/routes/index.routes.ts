@@ -4,6 +4,8 @@ import { protect, authorize } from "@middlewares/auth.middleware";
 import usersRouter from "./admin/user.routes";
 import transactionRouter from "./admin/transaction.routes";
 import analyticsRouter from "./admin/analytics.routes";
+import userTransactionRouter from "./user/transaction.routes";
+import userAnalyticsRouter from "./user/analytics.routes";
 
 const router = express.Router();
 
@@ -21,5 +23,9 @@ router.use(protect);
 router.use("/admin/users", usersRouter);
 router.use("/admin/transactions", transactionRouter);
 router.use("/admin/analytics", analyticsRouter);
+
+//user routers
+router.use("/user/transactions", authorize("USER"), userTransactionRouter);
+router.use("/user/analytics", authorize("USER"), userAnalyticsRouter);
 
 export default router;

@@ -1,6 +1,8 @@
 import { ReactNode, Suspense, lazy } from "react";
 import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
 import { useSession } from "./store/session.store";
+import UserTransactionDetails from "./pages/user/transaction-details";
+import Profile from "./pages/user/profile";
 
 // Lazy imports
 const Login = lazy(() => import("./components/auth/login"));
@@ -21,10 +23,22 @@ const TransactionDetails = lazy(() => import("./pages/admin-readonly/transaction
 const Analytics = lazy(() => import("./pages/admin-readonly/analytics/analytics"))
 const AnalyticDetail = lazy(() => import("./pages/admin-readonly/analytics/analytic-detail"))
 
+//user
+const UserLayout = lazy(() => import("./components/layout/user-layout"));
+const UserDashboard = lazy(() => import("./pages/user/dashboard"));
+
 
 const PrivateRoute = ({ children }: { children: ReactNode }) => {
   const { user } = useSession();
   if (user?.id && (user.role === "ADMIN" || user.role === "READ_ONLY")) {
+    return <>{children}</>;
+  }
+  return <Navigate to={"/auth/login"} />;
+};
+
+const UserPrivateRoute = ({ children }: { children: ReactNode }) => {
+  const { user } = useSession();
+  if (user?.id && (user.role === "USER")) {
     return <>{children}</>;
   }
   return <Navigate to={"/auth/login"} />;
@@ -69,7 +83,7 @@ export const Router = () => {
             }
           />
 
-          {/* Default admin-facing layout */}
+          {/* Default admin and read-only layout */}
           <Route
             path="/dashboard"
             element={
@@ -86,10 +100,25 @@ export const Router = () => {
             <Route path="analytics/:userId" element={<AnalyticDetail />} />
           </Route>
 
+          {/* Default user layout */}
+          <Route
+            path="/user"
+            element={
+              <UserPrivateRoute>
+                <UserLayout />
+              </UserPrivateRoute>
+            }
+          >
+            <Route index element={<UserDashboard />} />
+            <Route path="transactions" element={<UserTransactionDetails />} />
+            <Route path="profile" element={<Profile />} />
+          </Route>
+
           {/* Default public-facing layout */}
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
           </Route>
+
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>

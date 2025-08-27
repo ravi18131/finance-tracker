@@ -57,7 +57,12 @@ export default function Login() {
           toast.success(data.message || "Sign Up successful!!");
           setUser(data.data.user);
           localStorage.setItem("access_token", data.data.access_token);
-          navigate("/dashboard");
+          if (data.data.user.role === "USER") {
+            navigate("/user");
+          } else {
+            navigate("/dashboard");
+          }
+
         } else {
           toast.error(data.message || "Something went wrong!!");
         }
