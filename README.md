@@ -125,6 +125,76 @@ Once both client and server are running, access the app at:
 - Modern UI with ShadCN & Tailwind CSS
 - Zod validation for safer API inputs
 
+### ✅ User Authentication
+- JWT-based login and registration
+- Role-Based Access Control (RBAC)
+  - **admin** → full access
+  - **user** → manage own transactions
+  - **read-only** → view-only permissions
+
+### ✅ Transaction Management
+- Add, edit, delete income & expense transactions
+- Categorize transactions (Food, Transport, etc.)
+- Search & filter transactions
+- Read-only users can only view
+
+### ✅ Dashboard with Analytics
+- Monthly/yearly spending overview
+- Category-wise expense breakdown
+- Income vs Expense trends
+- Interactive charts with **Recharts**
+
+### ✅ Performance
+- Lazy loading for pages & components
+- Pagination for transaction lists
+- Redis caching for analytics
+- Rate limiting for API endpoints
+
+---
+
+## 🛠 Tech Stack
+
+- **Frontend**: React 18+
+- **Backend**: Node.js + Express.js
+- **Database**: PostgreSQL
+- **Caching**: Redis
+- **Charts**: Recharts
+
+---
+
+## ⚙️ Backend Features
+- **Caching**:
+  - User analytics cached for 15 minutes
+  - Category lists cached for 1 hour
+- **Rate Limiting**:
+  - Auth: 5 requests / 15 min
+  - Transactions: 100 requests / hour
+  - Analytics: 50 requests / hour
+- **Security**:
+  - Protected against SQL Injection & XSS
+  - JWT token-based API access
+- **RBAC** middleware to restrict access
+
+---
+
+## 📊 Frontend Features
+- React Hooks (`useContext` for auth, etc.)
+- Lazy loading via `React.lazy` + `Suspense`
+- Virtual scrolling for large lists
+- Recharts for data visualization:
+  - Pie chart → Category distribution
+  - Line chart → Monthly trends
+  - Bar chart → Income vs Expenses
+
+---
+
+## 🔑 Demo Credentials
+- **Admin**: `admin@finance.com / Admin@123`
+- **User**: `user@finance.com / User@123`
+- **Read-only**: `readonly@finance.com / Readonly@123`
+
+---
+
 ## 📜 License
 
 This project is licensed under the MIT License.
