@@ -6,11 +6,20 @@ interface ApiResponse<T> {
   data: T;
 }
 
+let endpoint = "https://taxnexus-fedl.onrender.com/api/v1/admin";
+if (window.origin.includes("taxnexus-admin.vercel.app")) {
+  endpoint = "https://taxnexus-fedl.onrender.com/api/v1/admin";
+}
+
+if (window.origin.includes("localhost")) {
+  endpoint = "http://localhost:5021/api/v1";
+}
+
 /**
  * Initializing axios instance
  */
 const fetchApi = axios.create({
-  baseURL: "http://localhost:5021/api/v1",
+  baseURL: endpoint,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",

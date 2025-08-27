@@ -1,6 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { MoveLeft, Plus } from "lucide-react";
-import Spinner from "@/components/shared/spinner";
 import { user_columns } from "../../components/admin-dashboard/users/users-table";
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/shared/data-table";
@@ -19,6 +18,7 @@ import ReadOnlyUserForm from "../../components/admin-dashboard/users/read-only-u
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSession } from "@/store/session.store";
+import Spinner from "@/components/ui/spinner";
 
 export default function Users() {
     const [openDialog, setOpenDialog] = useState(false);
@@ -89,7 +89,7 @@ export default function Users() {
                                 <Button className="rounded-sm flex items-center justify-center">
                                     <Plus className="w-5 h-5 mr-2" />
                                     Add Read Only User
-                                    <Spinner loading={false} />
+                                    <Spinner isLoading={false} />
                                 </Button>
                             </DialogTrigger>
                             <DialogContent>

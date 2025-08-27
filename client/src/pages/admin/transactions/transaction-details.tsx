@@ -1,7 +1,6 @@
 
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { MoveLeft, Plus } from "lucide-react";
-import Spinner from "@/components/shared/spinner";
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/shared/data-table";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -20,6 +19,7 @@ import { transaction_columns } from "@/components/admin-dashboard/transactions/t
 import TransactionForm from "@/components/admin-dashboard/transactions/transaction-form";
 import { ITransaction } from "@/lib/interfaces";
 import { useSession } from "@/store/session.store";
+import Spinner from "@/components/ui/spinner";
 
 export default function TransactionDetails() {
   const [openDialog, setOpenDialog] = useState(false);
@@ -84,7 +84,7 @@ export default function TransactionDetails() {
               <Button onClick={handleAdd} className="rounded-sm flex items-center justify-center">
                 <Plus className="w-5 h-5 mr-2" />
                 Add New Transaction
-                <Spinner loading={false} />
+                <Spinner isLoading={false} />
               </Button>
             </div>
           )

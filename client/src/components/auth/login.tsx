@@ -53,7 +53,6 @@ export default function Login() {
   const mutate = (data: FormValues) => {
     mutation.mutate(data, {
       onSuccess: ({ data }) => {
-        console.log("data: ", data);
         if (data.success && data.data && data.data.access_token) {
           toast.success(data.message || "Sign Up successful!!");
           setUser(data.data.user);
@@ -65,7 +64,6 @@ export default function Login() {
       },
       onError: (error: any) => {
         toast.error(error?.response?.data.error || "Something went wrong!!");
-        console.log("error", error);
       },
     });
   };

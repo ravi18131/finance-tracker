@@ -64,9 +64,8 @@ export default function SingUp() {
                     toast.error(data.message || "Something went wrong!!");
                 }
             },
-            onError: (error) => {
-                toast.error(error.message || "Something went wrong!!");
-                console.log("error", error);
+            onError: (error: any) => {
+                toast.error(error?.response?.data.error || "Something went wrong!!");
             },
         });
     };
