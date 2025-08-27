@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Download, MoveLeft } from "lucide-react";
-import { user_columns } from "../../../components/admin-dashboard/analytics/users-table";
+import { user_columns } from "../../../components/dashboard/admin-readonly/transactions/users-table";
 import { Button } from "@/components/ui/button";
 import { DataTable, export_data } from "@/components/shared/data-table";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -9,8 +9,7 @@ import fetchApi from "@/lib/axios";
 import { Link } from "react-router-dom";
 import { IUser } from "@/lib/interfaces";
 
-export default function Analytics() {
-
+export default function Transactions() {
     const query = useQuery({
         queryKey: ["users"],
         queryFn: () => fetchApi.get(`/admin/users`),
@@ -64,7 +63,7 @@ export default function Analytics() {
                         <MoveLeft className="w-4 h-4" />
                     </Link>
                     <div className="space-y-0">
-                        <p className="text-lg font-semibold">Manage User Analytics</p>
+                        <p className="text-lg font-semibold">Manage User Transactions</p>
                         <p className="text-gray-500">Lorem ipsum dolor sit amet.</p>
                     </div>
                 </div>

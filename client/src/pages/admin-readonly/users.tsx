@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { MoveLeft, Plus } from "lucide-react";
-import { user_columns } from "../../components/admin-dashboard/users/users-table";
+import { user_columns } from "../../components/dashboard/admin-readonly/users/users-table";
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/shared/data-table";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -14,7 +14,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import ReadOnlyUserForm from "../../components/admin-dashboard/users/read-only-user-form";
+import ReadOnlyUserForm from "../../components/dashboard/admin-readonly/users/read-only-user-form";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSession } from "@/store/session.store";

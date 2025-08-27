@@ -15,8 +15,8 @@ import {
 } from "@/components/ui/dialog";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { transaction_columns } from "@/components/admin-dashboard/transactions/transaction-table";
-import TransactionForm from "@/components/admin-dashboard/transactions/transaction-form";
+import { transaction_columns } from "@/components/dashboard/admin-readonly/transactions/transaction-table";
+import TransactionForm from "@/components/dashboard/admin-readonly/transactions/transaction-form";
 import { ITransaction } from "@/lib/interfaces";
 import { useSession } from "@/store/session.store";
 import Spinner from "@/components/ui/spinner";

@@ -1,5 +1,5 @@
-import { AppSidebar } from "@/components/layout/admin/app-sidebar";
-import { AdminHeader } from "@/components/layout/admin/header";
+import { AppSidebar } from "@/components/layout/dashboard/app-sidebar";
+import { AdminHeader } from "@/components/layout/dashboard/header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { Outlet } from "react-router-dom";
 

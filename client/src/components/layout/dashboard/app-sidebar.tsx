@@ -8,7 +8,7 @@ import {
   SettingsIcon,
   UsersIcon,
 } from "lucide-react";
-import { NavSecondary } from "@/components/layout/admin/nav-secondary";
+import { NavSecondary } from "@/components/layout/dashboard/nav-secondary";
 import {
   Sidebar,
   SidebarContent,

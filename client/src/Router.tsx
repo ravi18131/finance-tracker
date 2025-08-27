@@ -14,12 +14,12 @@ const Layout = lazy(() => import("./components/layout/home-layout"));
 
 // Admin
 const AdminLayout = lazy(() => import("./components/layout/admin-layout"));
-const Dashboard = lazy(() => import("./pages/admin/dashboard"));
-const Users = lazy(() => import("./pages/admin/users"));
-const Transactions = lazy(() => import("./pages/admin/transactions/transactions"));
-const TransactionDetails = lazy(() => import("./pages/admin/transactions/transaction-details"))
-const Analytics = lazy(() => import("./pages/admin/analytics/analytics"))
-const AnalyticDetail = lazy(() => import("./pages/admin/analytics/analytic-detail"))
+const Dashboard = lazy(() => import("./pages/admin-readonly/dashboard"));
+const Users = lazy(() => import("./pages/admin-readonly/users"));
+const Transactions = lazy(() => import("./pages/admin-readonly/transactions/transactions"));
+const TransactionDetails = lazy(() => import("./pages/admin-readonly/transactions/transaction-details"))
+const Analytics = lazy(() => import("./pages/admin-readonly/analytics/analytics"))
+const AnalyticDetail = lazy(() => import("./pages/admin-readonly/analytics/analytic-detail"))
 
 
 const PrivateRoute = ({ children }: { children: ReactNode }) => {
