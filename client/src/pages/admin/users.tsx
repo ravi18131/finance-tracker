@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { Plus } from "lucide-react";
+import { MoveLeft, Plus } from "lucide-react";
 import Spinner from "@/components/shared/spinner";
 import { user_columns } from "../../components/admin-dashboard/users/users-table";
 import { Button } from "@/components/ui/button";
@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/dialog";
 import ReadOnlyUserForm from "../../components/admin-dashboard/users/read-only-user-form";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Users() {
     const [openDialog, setOpenDialog] = useState(false);
@@ -60,33 +61,51 @@ export default function Users() {
     return (
         <section>
             <div className="flex items-center justify-between mb-5">
-                <p className=" text-lg font-semibold">Manage users</p>
+                {/* Left side: back button + title */}
+                <div className="flex items-center gap-3">
+                    <Link
+                        to="/admin"
+                        className="rounded-full border border-black flex items-center justify-center w-8 h-8"
+                    >
+                        <MoveLeft className="w-4 h-4" />
+                    </Link>
+                    <div className="space-y-0">
+                        <p className="text-lg font-semibold">Manage Users</p>
+                        <p className="text-gray-500">Lorem ipsum dolor sit amet.</p>
+                    </div>
+                </div>
 
-                <Dialog open={openDialog} onOpenChange={setOpenDialog}>
-                    <DialogTrigger asChild>
-                        <Button className="rounded-sm">
-                            <Plus className="w-5 h-5 mr-2" /> Add Read Only User
-                            <Spinner loading={false} />
-                        </Button>
-                    </DialogTrigger>
-                    <DialogContent>
-                        <DialogHeader>
-                            <DialogTitle>Add Read Only User</DialogTitle>
-                            <DialogDescription>
-                                Fill in the details below to create a read-only user.
-                            </DialogDescription>
-                        </DialogHeader>
 
-                        <ReadOnlyUserForm
-                            onSuccess={() => {
-                                query.refetch();
-                                setOpenDialog(false);
-                            }}
-                            setOpenDialog={setOpenDialog}
-                        />
-                    </DialogContent>
-                </Dialog>
+                {/* Right side: Add User Button */}
+                <div className="flex justify-center items-center">
+                    <Dialog open={openDialog} onOpenChange={setOpenDialog} >
+                        <DialogTrigger asChild>
+                            <Button className="rounded-sm flex items-center justify-center">
+                                <Plus className="w-5 h-5 mr-2" />
+                                Add Read Only User
+                                <Spinner loading={false} />
+                            </Button>
+                        </DialogTrigger>
+                        <DialogContent>
+                            <DialogHeader>
+                                <DialogTitle>Add Read Only User</DialogTitle>
+                                <DialogDescription>
+                                    Fill in the details below to create a read-only user.
+                                </DialogDescription>
+                            </DialogHeader>
+
+                            <ReadOnlyUserForm
+                                onSuccess={() => {
+                                    query.refetch();
+                                    setOpenDialog(false);
+                                }}
+                                setOpenDialog={setOpenDialog}
+                            />
+                        </DialogContent>
+                    </Dialog>
+                </div>
             </div>
+
 
             {!query.isPending ? (
                 <DataTable

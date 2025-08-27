@@ -1,27 +1,13 @@
 import * as React from "react";
 import {
-  ArrowUpCircleIcon,
   BarChartIcon,
   BookOpen,
-  CameraIcon,
-  ClipboardListIcon,
-  DatabaseIcon,
-  FileCodeIcon,
-  FileIcon,
-  FileTextIcon,
-  FolderIcon,
   HelpCircleIcon,
-  Home,
   LayoutDashboardIcon,
-  ListIcon,
   SearchIcon,
   SettingsIcon,
-  User,
   UsersIcon,
 } from "lucide-react";
-
-import { NavDocuments } from "@/components/layout/admin/nav-documents";
-import { NavMain } from "@/components/layout/admin/nav-main";
 import { NavSecondary } from "@/components/layout/admin/nav-secondary";
 import {
   Sidebar,

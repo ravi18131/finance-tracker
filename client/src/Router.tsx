@@ -1,6 +1,7 @@
 import { ReactNode, Suspense, lazy } from "react";
 import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
 import { useSession } from "./store/session.store";
+import TransactionDetails from "./pages/admin/transactions/transaction-details";
 
 // Lazy imports
 const Login = lazy(() => import("./components/auth/login"));
@@ -16,7 +17,7 @@ const Layout = lazy(() => import("./components/layout/home-layout"));
 const AdminLayout = lazy(() => import("./components/layout/admin-layout"));
 const Dashboard = lazy(() => import("./pages/admin/dashboard"));
 const Users = lazy(() => import("./pages/admin/users"));
-const Transactions = lazy(() => import("./pages/admin/transactions"));
+const Transactions = lazy(() => import("./pages/admin/transactions/transactions"));
 
 const AdminPrivateRoute = ({ children }: { children: ReactNode }) => {
   const { user } = useSession();
@@ -77,6 +78,7 @@ export const Router = () => {
             <Route index element={<Dashboard />} />
             <Route path="users" element={<Users />} />
             <Route path="transactions" element={<Transactions />} />
+            <Route path="transactions/:userId" element={<TransactionDetails />} />
           </Route>
 
           {/* Default public-facing layout */}

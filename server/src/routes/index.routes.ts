@@ -2,6 +2,7 @@ import express from "express";
 import authRouter from "@routes/auth/index.routes";
 import { protect, authorize } from "@middlewares/auth.middleware";
 import usersRouter from "./admin/user.routes";
+import transactionRouter from "./admin/transaction.routes";
 
 const router = express.Router();
 
@@ -17,6 +18,7 @@ router.use(protect);
 
 // Admin-only routes
 router.use("/admin/users", authorize("ADMIN"), usersRouter);
+router.use("/admin/transactions", authorize("ADMIN"), transactionRouter);
 
 // Example: User-only routes
 router.get("/profile", authorize("USER"), (req, res) => {

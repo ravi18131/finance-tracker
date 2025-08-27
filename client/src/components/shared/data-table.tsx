@@ -49,6 +49,21 @@ interface DataTableProps<TData, TValue> {
   page_size?: number[];
 }
 
+
+export const export_data = (data: any[]) => {
+  const worksheet = XLSX.utils.json_to_sheet(data);
+
+  // Create a workbook
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+
+  // Export the workbook to an XLSX file
+  XLSX.writeFile(workbook, `${new Date().toISOString()}.xlsx`, {
+    bookType: "xlsx",
+    type: "buffer",
+  });
+};
+
 export function DataTable<TData, TValue>({
   columns,
   data,
@@ -89,19 +104,7 @@ export function DataTable<TData, TValue>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const export_data = () => {
-    const worksheet = XLSX.utils.json_to_sheet(data);
 
-    // Create a workbook
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-
-    // Export the workbook to an XLSX file
-    XLSX.writeFile(workbook, `${new Date().toISOString()}.xlsx`, {
-      bookType: "xlsx",
-      type: "buffer",
-    });
-  };
 
   return (
     <div className="space-y-4">
@@ -157,7 +160,7 @@ export function DataTable<TData, TValue>({
           <Button
             variant="outline"
             className="h-8 px-2 lg:px-3 w-28"
-            onClick={export_data}
+            onClick={() => export_data(data)}
           >
             <File className="mr-3 h-5 w-5" />
             Export
@@ -173,16 +176,15 @@ export function DataTable<TData, TValue>({
                   return (
                     <TableHead
                       key={header.id}
-                      className={`${
-                        index === 0 ? "text-nowrap" : "text-nowrap text-center"
-                      } `}
+                      className={`${index === 0 ? "text-nowrap" : "text-nowrap text-center"
+                        } `}
                     >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
                     </TableHead>
                   );
                 })}
@@ -199,9 +201,8 @@ export function DataTable<TData, TValue>({
                   {row.getVisibleCells().map((cell, index) => (
                     <TableCell
                       key={cell.id}
-                      className={`${
-                        index === 0 ? "pl-5" : "text-center"
-                      } text-nowrap`}
+                      className={`${index === 0 ? "pl-5" : "text-center"
+                        } text-nowrap`}
                     >
                       {flexRender(
                         cell.column.columnDef.cell,

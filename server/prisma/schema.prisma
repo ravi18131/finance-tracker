@@ -16,6 +16,11 @@ enum Role {
   READ_ONLY
 }
 
+enum TransactionType {
+  INCOME
+  EXPENSE
+}
+
 model User {
   id           Int           @id @default(autoincrement())
   name         String
@@ -31,15 +36,15 @@ model User {
 }
 
 model Transaction {
-  id          Int      @id @default(autoincrement())
-  type        String // 'income' | 'expense'
+  id          Int             @id @default(autoincrement())
+  type        TransactionType @default(EXPENSE)
   amount      Float
   category    String
   description String?
-  date        DateTime @default(now())
+  date        DateTime        @default(now())
   userId      Int
-  user        User     @relation(fields: [userId], references: [id])
-  createdAt   DateTime @default(now())
+  user        User            @relation(fields: [userId], references: [id])
+  createdAt   DateTime        @default(now())
 
   @@map("transaction")
 }
