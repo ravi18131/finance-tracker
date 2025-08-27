@@ -16,7 +16,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SidebarMenuButton } from "@/components/ui/sidebar";
-import { useSession } from "@/store/session.store";
+import { useSession } from "@/context/session-context";
 
 export function NavUser() {
   const { user, logoutUser } = useSession();

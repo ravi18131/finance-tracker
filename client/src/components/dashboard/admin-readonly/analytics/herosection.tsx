@@ -1,4 +1,4 @@
-import { useSession } from '@/store/session.store';
+import { useSession } from '@/context/session-context';
 import { Calendar } from 'lucide-react'
 
 const HeroSection = () => {

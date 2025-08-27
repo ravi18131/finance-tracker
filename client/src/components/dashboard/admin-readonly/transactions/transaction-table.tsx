@@ -21,7 +21,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useSession } from "@/store/session.store";
+import { useSession } from "@/context/session-context";
 import { useState } from "react";
 
 export const transaction_columns = (

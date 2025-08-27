@@ -5,7 +5,7 @@ import { IUser } from "@/lib/interfaces";
 import { Switch } from "@/components/ui/switch";
 import { format } from "date-fns";
 import { Badge } from "@/components/ui/badge";
-import { useSession } from "@/store/session.store";
+import { useSession } from "@/context/session-context";
 
 export const user_columns = (updateUserStatus: (id: string, data: { is_blocked: boolean; }) => void): ColumnDef<IUser>[] => {
     return [

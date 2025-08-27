@@ -1,6 +1,6 @@
 import { ReactNode, Suspense, lazy } from "react";
 import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
-import { useSession } from "./store/session.store";
+import { useSession } from "./context/session-context";
 import UserTransactionDetails from "./pages/user/transaction-details";
 import Profile from "./pages/user/profile";
 

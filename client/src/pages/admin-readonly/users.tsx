@@ -17,7 +17,7 @@ import {
 import ReadOnlyUserForm from "../../components/dashboard/admin-readonly/users/read-only-user-form";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useSession } from "@/store/session.store";
+import { useSession } from "@/context/session-context";
 import Spinner from "@/components/ui/spinner";
 
 export default function Users() {

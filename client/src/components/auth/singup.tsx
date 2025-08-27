@@ -12,7 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link, useNavigate } from "react-router-dom";
-import { useSession } from "@/store/session.store";
+import { useSession } from "@/context/session-context";
 import { useMutation } from "@tanstack/react-query";
 import fetchApi from "@/lib/axios";
 import Spinner from "../ui/spinner";
