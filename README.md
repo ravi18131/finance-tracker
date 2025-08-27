@@ -4,15 +4,17 @@ Welcome to the **Finance Tracker(FinTrack)**! This repository provides a full-st
 
 ## 🚀 Tech Stack
 
-- **Frontend:** React (Vite) + Zustand (State Management) + ShadCN UI (with Tailwind CSS)
+- **Frontend:** React 18+ (Vite) + Zustand (State Management) + ShadCN UI (with Tailwind CSS)
 - **Backend:** Node.js + Express.js + TypeScript
-- **Database:** Prisma ORM (with a seeder)
+- **Database:** PostgreSQL + Prisma ORM (with a seeder)
 - **Validation:** Zod
+- **Caching:** Redis
+- **Charts:** Recharts
 
 ## 📂 Project Structure
 
 ```
-starter-template/
+finance-tracker/
 │── server/            # Express.js server
 │   ├── src/
 |   ├───|── config/
@@ -126,7 +128,3 @@ Once both client and server are running, access the app at:
 ## 📜 License
 
 This project is licensed under the MIT License.
-
-## 🤝 Contributing
-
-Feel free to submit PRs or issues for enhancements and bug fixes. Happy coding! 🎉
