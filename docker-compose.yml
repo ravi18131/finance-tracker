@@ -44,34 +44,6 @@ services:
     networks:
       - fintracknetwork
 
-  watchtower:
-    image: containrrr/watchtower
-    container_name: watchtower
-    restart: always
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /root/.docker/config.json:/config.json:ro
-    environment:
-      - WATCHTOWER_CLEANUP=true
-      - WATCHTOWER_LABEL_ENABLE=false
-      - WATCHTOWER_POLL_INTERVAL=600
-      - WATCHTOWER_ROLLING_RESTART=true
-    networks:
-      - fintracknetwork
-  nginx-proxy-manager:
-    image: 'jc21/nginx-proxy-manager:latest'
-    container_name: nginx-proxy-manager
-    restart: always
-    ports:
-      - '80:80'
-      - '81:81'
-      - '443:443'
-    volumes:
-      - ./data:/data
-      - ./letsencrypt:/etc/letsencrypt
-    networks:
-      - fintracknetwork
-
 volumes:
   redis_data:
 
