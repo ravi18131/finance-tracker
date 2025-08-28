@@ -207,7 +207,7 @@ This setup ensures high availability, scalability, and containerized management 
 ## 🔑 Demo Credentials
 - **Admin**: `admin@finance.com / Admin@123`
 - **User**: `user@finance.com / User@123`
-- **Read-only**: `readonly@finance.com / Readonly@123`
+- **Read-only**: `view@finance.com / view@123`
 
 ---
 
