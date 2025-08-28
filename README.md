@@ -113,6 +113,21 @@ Once both client and server are running, access the app at:
 - Client: `http://localhost:4011`
 - Server: `http://localhost:4012`
 
+## ⚡ Deployment
+
+The application has been successfully deployed on AWS using Docker containers managed via ECR (Elastic Container Registry) and ECS (Elastic Container Service).
+
+### ✅ Deployment Details
+
+#### Redis Server – deployed on ECS for caching and analytics.
+
+#### Frontend (Client App) – accessible at:
+👉 http://13.127.219.163/
+
+#### Backend (API Server) – accessible at:
+👉 http://13.232.161.114:4012/api/v1/health-check
+
+This setup ensures high availability, scalability, and containerized management for both client and server applications.
 
 ## 🔥 Features
 
