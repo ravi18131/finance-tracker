@@ -6,10 +6,10 @@ interface ApiResponse<T> {
   data: T;
 }
 
-let endpoint = "https://taxnexus-fedl.onrender.com/api/v1/admin";
-if (window.origin.includes("taxnexus-admin.vercel.app")) {
-  endpoint = "https://taxnexus-fedl.onrender.com/api/v1/admin";
-}
+let endpoint = "http://13.232.161.114:4012/api/v1";
+// if (window.origin.includes("taxnexus-admin.vercel.app")) {
+//   endpoint = "http://13.232.161.114:4012/api/v1";
+// }
 
 if (window.origin.includes("localhost")) {
   endpoint = "http://localhost:4012/api/v1";
