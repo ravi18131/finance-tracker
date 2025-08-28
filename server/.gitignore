@@ -4,5 +4,3 @@ node_modules
 
 dist
 
-# Ignore the public directory. Don't use it for asset
-public

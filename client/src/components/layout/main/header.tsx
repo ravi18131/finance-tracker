@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Github, Code, User } from "lucide-react";
+import { User } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function Header() {

@@ -1,0 +1,80 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: ./server
+    ports:
+      - "4012:4012"
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=redis://redis:6379
+      - NODE_ENV=production
+    env_file:
+      - ./server/.env.production
+    depends_on:
+      redis:
+        condition: service_started  # Wait for Redis to start
+      # Optional: wait for db too
+    restart: unless-stopped
+    # Optional: set working directory or health check
+    working_dir: /app
+    networks:
+      - fintracknetwork
+
+  client:
+    build:
+      context: ./client
+    ports:
+      - "4011:80"
+    restart: unless-stopped
+    networks:
+      - fintracknetwork
+    # No dependencies needed if client is static
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    # Improve startup logging
+    command: ["redis-server", "--loglevel", "notice"]
+    networks:
+      - fintracknetwork
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /root/.docker/config.json:/config.json:ro
+    environment:
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_LABEL_ENABLE=false
+      - WATCHTOWER_POLL_INTERVAL=600
+      - WATCHTOWER_ROLLING_RESTART=true
+    networks:
+      - fintracknetwork
+  nginx-proxy-manager:
+    image: 'jc21/nginx-proxy-manager:latest'
+    container_name: nginx-proxy-manager
+    restart: always
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+    networks:
+      - fintracknetwork
+
+volumes:
+  redis_data:
+
+networks:
+  fintracknetwork:
+    driver: bridge

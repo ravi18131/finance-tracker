@@ -31,7 +31,7 @@ export const getAllTransactionsAnalytics = asyncHandler(async (req: Request, res
     const expenseMap: Record<string, number> = {};
     const monthlyMap: Record<string, { income: number; expense: number }> = {};
 
-    transactions.forEach((txn) => {
+    transactions.forEach((txn:any) => {
         if (txn.type === "INCOME") incomeMap[txn.category] = (incomeMap[txn.category] || 0) + txn.amount;
         else if (txn.type === "EXPENSE") expenseMap[txn.category] = (expenseMap[txn.category] || 0) + txn.amount;
 

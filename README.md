@@ -105,7 +105,7 @@ npm run dev
 Once both client and server are running, access the app at:
 
 - Client: `http://localhost:5020`
-- Server: `http://localhost:5021`
+- Server: `http://localhost:4012`
 
 ## 🔥 Features
 

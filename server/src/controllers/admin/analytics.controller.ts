@@ -29,7 +29,7 @@ export const getAllTransactionsAnalytics = asyncHandler(async (req: Request, res
     const expenseMap: Record<string, number> = {};
     const monthlyMap: Record<string, { income: number; expense: number }> = {};
 
-    transactions.forEach((txn) => {
+    transactions.forEach((txn:any) => {
         if (txn.type === "INCOME") incomeMap[txn.category] = (incomeMap[txn.category] || 0) + txn.amount;
         else if (txn.type === "EXPENSE") expenseMap[txn.category] = (expenseMap[txn.category] || 0) + txn.amount;
 
@@ -110,7 +110,7 @@ export const getUserWithAnalyticsCategoryByUserId = asyncHandler(async (req: Req
     const expenseMap: Record<string, number> = {};
     const monthlyMap: Record<string, { income: number; expense: number }> = {};
 
-    user.transactions.forEach((txn) => {
+    user.transactions.forEach((txn:any) => {
         const month = txn.date.toLocaleString("default", { month: "short", year: "numeric" });
         if (!monthlyMap[month]) monthlyMap[month] = { income: 0, expense: 0 };
 

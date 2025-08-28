@@ -35,7 +35,7 @@ const validateEnv = <T extends string = string>(
  * Register all environment variables here for better error handling and use this config in place of process.env
  */
 const config = {
-  PORT: validateEnv("PORT", "5021", true),
+  PORT: validateEnv("PORT", "4012", true),
   DATABASE_URL: validateEnv("DATABASE_URL"),
   ACCESS_TOKEN_PUBLIC_KEY: validateEnv("ACCESS_TOKEN_PUBLIC_KEY"),
   ACCESS_TOKEN_PRIVATE_KEY: validateEnv("ACCESS_TOKEN_PRIVATE_KEY"),

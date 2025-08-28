@@ -12,7 +12,7 @@ if (window.origin.includes("taxnexus-admin.vercel.app")) {
 }
 
 if (window.origin.includes("localhost")) {
-  endpoint = "http://localhost:5021/api/v1";
+  endpoint = "http://localhost:4012/api/v1";
 }
 
 /**
